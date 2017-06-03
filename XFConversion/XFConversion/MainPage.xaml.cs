@@ -10,10 +10,10 @@ namespace XFConversion
 {
     public partial class MainPage : ContentPage
     {
-        public static string clientId = "your-client-id";
-        public static string authority = "https://login.windows.net/common";
-        public static string returnUri = "your-redirct-uri";
-        private const string graphResourceUri = "https://graph.windows.net";
+        //public static string clientId = "your-client-id";
+        //public static string authority = "https://login.windows.net/common";
+        //public static string returnUri = "your-redirct-uri";
+        //private const string graphResourceUri = "https://graph.windows.net";
         private AuthenticationResult authResult = null;
         public MainPage()
         {
@@ -22,12 +22,27 @@ namespace XFConversion
         }
         
         
-        private async void Button_OnClicked(object sender, EventArgs e)
+
+        private async void ButtonAuthenticate_OnClicked(object sender, EventArgs e)
         {
-            var auth = DependencyService.Get<IAuthenticator>();
-            var data = await auth.Authenticate(authority, graphResourceUri, clientId, returnUri);
-            var userName = data.UserInfo.GivenName + " " + data.UserInfo.FamilyName;
-            await DisplayAlert("Token", userName, "Ok", "Cancel");
+            await Authenticate();
+
+        }
+
+        private async Task Authenticate()
+        {
+            try
+            {
+                var auth = DependencyService.Get<IAuthenticator>();
+                var data = await auth.Authenticate(Configuration.Authority, Configuration.Authority, Configuration.ClientId, Configuration.RedirectUri);
+                var userName = data.UserInfo.GivenName + " " + data.UserInfo.FamilyName;
+                await DisplayAlert("Token", userName, "Ok", "Cancel");
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }

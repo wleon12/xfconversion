@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 using Foundation;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using UIKit;
-
-n
 using Xamarin.Forms;
 using XFConversion;
 

@@ -3,9 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:XFConversion"
              x:Class="XFConversion.MainPage">
-
-	<Label Text="Welcome to Xamarin Forms!" 
-           VerticalOptions="Center" 
-           HorizontalOptions="Center" />
+    <ContentPage.Content>
+        <StackLayout>
+            <Button x:Name="ButtonAuthenticate"
+                    Text="Authenticate"
+                    Clicked="ButtonAuthenticate_OnClicked"></Button>
+        </StackLayout>
+    </ContentPage.Content>
 
 </ContentPage>
