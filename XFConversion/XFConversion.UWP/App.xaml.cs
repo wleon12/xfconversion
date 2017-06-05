@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
 namespace XFConversion.UWP
 {
@@ -30,6 +31,10 @@ namespace XFConversion.UWP
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            var platformParameters =
+                new PlatformParameters(PromptBehavior.Auto, false);
+
+            AuthenticationManager.SetParameters(platformParameters);
         }
 
         /// <summary>
