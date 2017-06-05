@@ -26,23 +26,19 @@ namespace XFConversion.ViewModels
 
         #region Properties
 
-        public bool ShowErrorMessage
-        {
+        public bool ShowErrorMessage {
             get { return _showErrorMessage; }
             set { _showErrorMessage = value; OnPropertyChanged(); }
         }
 
-        public string ErrorMessage
-        {
+        public string ErrorMessage {
             get { return _errorMessage; }
             set { _errorMessage = value; OnPropertyChanged(); }
         }
 
-        public bool IsConnected
-        {
+        public bool IsConnected {
             get { return _isConnected; }
-            set
-            {
+            set {
                 if (_isConnected != value)
                 {
                     _isConnected = value;
@@ -51,11 +47,9 @@ namespace XFConversion.ViewModels
             }
         }
 
-        public string FirstName
-        {
+        public string FirstName {
             get { return _firstName; }
-            set
-            {
+            set {
                 if (_firstName != value)
                 {
                     _firstName = value;
@@ -64,11 +58,9 @@ namespace XFConversion.ViewModels
             }
         }
 
-        public string LastName
-        {
+        public string LastName {
             get { return _lastName; }
-            set
-            {
+            set {
                 if (_lastName != value)
                 {
                     _lastName = value;
@@ -77,11 +69,9 @@ namespace XFConversion.ViewModels
             }
         }
 
-        public string Email
-        {
+        public string Email {
             get { return _email; }
-            set
-            {
+            set {
                 if (_email != value)
                 {
                     _email = value;
@@ -90,11 +80,9 @@ namespace XFConversion.ViewModels
             }
         }
 
-        public string ApiResponse
-        {
+        public string ApiResponse {
             get { return _apiResponse; }
-            set
-            {
+            set {
                 if (_apiResponse != value)
                 {
                     _apiResponse = value;
@@ -153,9 +141,8 @@ namespace XFConversion.ViewModels
         {
             ResetErrorMessage();
             var httpClient = _authenticationManager.CreateHttpClient();
-            var something = new Uri("values", UriKind.Relative);
+            var response = await httpClient.GetAsync(new Uri("values", UriKind.Relative));
 
-            var response = await httpClient.GetAsync(new Uri("https://canadawebapi.azurewebsites.net/api/values"));
 
             if (response.IsSuccessStatusCode)
             {

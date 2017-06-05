@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.26228.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XFConversion.Android", "XFConversion\XFConversion.Android\XFConversion.Android.csproj", "{20743C16-C6A5-49C6-91F5-35D9CDB022C9}"
 EndProject
@@ -203,6 +203,8 @@ Global
 		{E9496367-288D-4563-9EA3-7D727BAFC8C2}.Debug|ARM.Deploy.0 = Debug|ARM
 		{E9496367-288D-4563-9EA3-7D727BAFC8C2}.Debug|iPhone.ActiveCfg = Debug|x86
 		{E9496367-288D-4563-9EA3-7D727BAFC8C2}.Debug|iPhoneSimulator.ActiveCfg = Debug|x86
+		{E9496367-288D-4563-9EA3-7D727BAFC8C2}.Debug|iPhoneSimulator.Build.0 = Debug|x86
+		{E9496367-288D-4563-9EA3-7D727BAFC8C2}.Debug|iPhoneSimulator.Deploy.0 = Debug|x86
 		{E9496367-288D-4563-9EA3-7D727BAFC8C2}.Debug|x64.ActiveCfg = Debug|x64
 		{E9496367-288D-4563-9EA3-7D727BAFC8C2}.Debug|x64.Build.0 = Debug|x64
 		{E9496367-288D-4563-9EA3-7D727BAFC8C2}.Debug|x64.Deploy.0 = Debug|x64
