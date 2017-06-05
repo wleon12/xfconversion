@@ -11,5 +11,6 @@ namespace XFConversion
     public interface IAuthenticator
     {
         Task<AuthenticationResult> Authenticate(string authority, string resource, string clientId, string returnUri);
+        void Logout(string authority, string resource, string clientId);
     }
 }

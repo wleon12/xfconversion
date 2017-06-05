@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Foundation;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using UIKit;
 using Xamarin.Forms;
-using XFConversion;
+using XFConversion.iOS;
 
-[assembly: Dependency(typeof(ADALForForms.iOS.Helper.Authenticator))]
-namespace ADALForForms.iOS.Helper
+[assembly: Dependency(typeof(Authenticator))]
+namespace XFConversion.iOS
 {
     class Authenticator : IAuthenticator
     {
@@ -25,6 +22,26 @@ namespace ADALForForms.iOS.Helper
             var platformParams = new PlatformParameters(controller);
             var authResult = await authContext.AcquireTokenAsync(resource, clientId, uri, platformParams);
             return authResult;
+        }
+        public void Logout(string authority, string resource, string clientId)
+        {
+            try
+            {
+                var authContext = new AuthenticationContext(authority);
+                var cachedToken = authContext.TokenCache.ReadItems().FirstOrDefault(t => t.Authority == authority && t.ClientId == clientId && t.Resource == resource);
+
+                if (cachedToken != null)
+                {
+                    authContext.TokenCache.DeleteItem(cachedToken);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
         }
     }
 }

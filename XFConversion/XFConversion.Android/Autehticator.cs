@@ -9,7 +9,7 @@ using XFConversion.Droid;
 [assembly: Dependency(typeof(Authenticator))]
 namespace XFConversion.Droid
 {
-    class Authenticator : IAuthenticator
+    public class Authenticator : IAuthenticator
     {
         public async Task<AuthenticationResult> Authenticate(string authority, string resource, string clientId, string returnUri)
         {
@@ -29,7 +29,27 @@ namespace XFConversion.Droid
 
                 throw;
             }
-          
+
+        }
+        public void Logout(string authority, string resource, string clientId)
+        {
+            try
+            {
+                var authContext = new AuthenticationContext(authority);
+                var cachedToken = authContext.TokenCache.ReadItems().FirstOrDefault(t => t.Authority == authority && t.ClientId == clientId && t.Resource == resource);
+
+                if (cachedToken != null)
+                {
+                    authContext.TokenCache.DeleteItem(cachedToken);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
         }
     }
 }

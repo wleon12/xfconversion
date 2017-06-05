@@ -6,9 +6,32 @@
     <ContentPage.Content>
         <StackLayout>
             <Button x:Name="ButtonAuthenticate"
-                    Text="Authenticate"
-                    Clicked="ButtonAuthenticate_OnClicked"></Button>
+                    Text="Login"
+                    Command="{Binding LoginCommand}"></Button>
+            <Button x:Name="ButtonLogout"
+                    Text="LogOut"
+                    Command="{Binding LogoutCommand}"></Button>
+            <Button x:Name="ButtonQueryAPI"
+                    Text="Query API"
+                    Command="{Binding QueryAPICommand}"></Button>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Is Connected:"></Label>
+                <Label Text="{Binding IsConnected}"></Label>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="First Name:"></Label>
+                <Label Text="{Binding FirstName}"></Label>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Last Name:"></Label>
+                <Label Text="{Binding LastName}"></Label>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Email:"></Label>
+                <Label Text="{Binding Email}"></Label>
+            </StackLayout>
         </StackLayout>
+        
     </ContentPage.Content>
 
 </ContentPage>
