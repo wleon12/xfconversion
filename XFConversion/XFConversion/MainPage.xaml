@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:XFConversion"
              x:Class="XFConversion.MainPage">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Margin="10">
             <Button x:Name="ButtonAuthenticate"
                     Text="Login"
                     Command="{Binding LoginCommand}"></Button>
@@ -30,6 +30,7 @@
                 <Label Text="Email:"></Label>
                 <Label Text="{Binding Email}"></Label>
             </StackLayout>
+            <Label Margin="0,10" TextColor="Red" Text="{Binding ErrorMessage}" IsVisible="{Binding ShowErrorMessage}"></Label>
         </StackLayout>
         
     </ContentPage.Content>

@@ -19,14 +19,30 @@ namespace XFConversion.ViewModels
         private string _apiResponse;
 
         private AuthenticationManager _authenticationManager;
+        private bool _showErrorMessage;
+        private string _errorMessage;
 
         #endregion
 
         #region Properties
 
-        public bool IsConnected {
+        public bool ShowErrorMessage
+        {
+            get { return _showErrorMessage; }
+            set { _showErrorMessage = value; OnPropertyChanged(); }
+        }
+
+        public string ErrorMessage
+        {
+            get { return _errorMessage; }
+            set { _errorMessage = value; OnPropertyChanged(); }
+        }
+
+        public bool IsConnected
+        {
             get { return _isConnected; }
-            set {
+            set
+            {
                 if (_isConnected != value)
                 {
                     _isConnected = value;
@@ -35,9 +51,11 @@ namespace XFConversion.ViewModels
             }
         }
 
-        public string FirstName {
+        public string FirstName
+        {
             get { return _firstName; }
-            set {
+            set
+            {
                 if (_firstName != value)
                 {
                     _firstName = value;
@@ -46,9 +64,11 @@ namespace XFConversion.ViewModels
             }
         }
 
-        public string LastName {
+        public string LastName
+        {
             get { return _lastName; }
-            set {
+            set
+            {
                 if (_lastName != value)
                 {
                     _lastName = value;
@@ -57,9 +77,11 @@ namespace XFConversion.ViewModels
             }
         }
 
-        public string Email {
+        public string Email
+        {
             get { return _email; }
-            set {
+            set
+            {
                 if (_email != value)
                 {
                     _email = value;
@@ -68,9 +90,11 @@ namespace XFConversion.ViewModels
             }
         }
 
-        public string ApiResponse {
+        public string ApiResponse
+        {
             get { return _apiResponse; }
-            set {
+            set
+            {
                 if (_apiResponse != value)
                 {
                     _apiResponse = value;
@@ -81,12 +105,12 @@ namespace XFConversion.ViewModels
 
         #endregion
 
-        public ICommand   LoginCommand { get; private set; }
+        public ICommand LoginCommand { get; private set; }
         public ICommand LogoutCommand { get; private set; }
         public ICommand QueryAPICommand { get; private set; }
         public MainViewModel()
         {
-            LoginCommand= new Command(async ()=> await LoginAsync());
+            LoginCommand = new Command(async () => await LoginAsync());
             LogoutCommand = new Command(LogoutAsync);
             QueryAPICommand = new Command(async () => await QueryApiAsync());
         }
@@ -98,6 +122,7 @@ namespace XFConversion.ViewModels
 
         public async Task LoginAsync()
         {
+            ResetErrorMessage();
             await _authenticationManager.LoginAsync();
 
             var user = AuthenticationManager.UserInfo;
@@ -108,10 +133,10 @@ namespace XFConversion.ViewModels
             ApiResponse = null;
         }
 
-        public  void LogoutAsync()
+        public void LogoutAsync()
         {
-             _authenticationManager.Logout();
-
+            ResetErrorMessage();
+            _authenticationManager.Logout();
             IsConnected = false;
             FirstName = null;
             LastName = null;
@@ -119,11 +144,17 @@ namespace XFConversion.ViewModels
             ApiResponse = null;
         }
 
+        private void ResetErrorMessage()
+        {
+            ErrorMessage = null;
+            ShowErrorMessage = false;
+        }
         public async Task QueryApiAsync()
         {
+            ResetErrorMessage();
             var httpClient = _authenticationManager.CreateHttpClient();
             var something = new Uri("values", UriKind.Relative);
-         
+
             var response = await httpClient.GetAsync(new Uri("https://canadawebapi.azurewebsites.net/api/values"));
 
             if (response.IsSuccessStatusCode)
@@ -134,6 +165,8 @@ namespace XFConversion.ViewModels
             else
             {
                 ApiResponse = $"HTTP {(int)response.StatusCode} - {Enum.GetName(typeof(HttpStatusCode), response.StatusCode)}";
+                ErrorMessage = ApiResponse;
+                ShowErrorMessage = true;
             }
         }
 
